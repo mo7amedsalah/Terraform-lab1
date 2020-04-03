@@ -1,0 +1,343 @@
+{
+  "version": 4,
+  "terraform_version": "0.12.2",
+  "serial": 14,
+  "lineage": "d6d426da-314d-5cbc-c4d3-fe70a69d01fe",
+  "outputs": {},
+  "resources": [
+    {
+      "mode": "managed",
+      "type": "aws_internet_gateway",
+      "name": "gitway",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "igw-0e0af1a5b17327a63",
+            "owner_id": "386702012512",
+            "tags": {
+              "Name": "gitway"
+            },
+            "vpc_id": "vpc-005aaf1f9a3275c32"
+          },
+          "private": "bnVsbA==",
+          "depends_on": [
+            "aws_vpc.first-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "privateRoute",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "rtb-08f740373bc6a7aff",
+            "owner_id": "386702012512",
+            "propagating_vgws": [],
+            "route": [],
+            "tags": {
+              "Name": "privateRoute"
+            },
+            "vpc_id": "vpc-005aaf1f9a3275c32"
+          },
+          "private": "bnVsbA==",
+          "depends_on": [
+            "aws_vpc.first-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table",
+      "name": "publicRoute",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "id": "rtb-03814b0516d60de2b",
+            "owner_id": "386702012512",
+            "propagating_vgws": [],
+            "route": [
+              {
+                "cidr_block": "0.0.0.0/0",
+                "egress_only_gateway_id": "",
+                "gateway_id": "igw-0e0af1a5b17327a63",
+                "instance_id": "",
+                "ipv6_cidr_block": "",
+                "nat_gateway_id": "",
+                "network_interface_id": "",
+                "transit_gateway_id": "",
+                "vpc_peering_connection_id": ""
+              }
+            ],
+            "tags": {
+              "Name": "publicRoute"
+            },
+            "vpc_id": "vpc-005aaf1f9a3275c32"
+          },
+          "private": "bnVsbA==",
+          "depends_on": [
+            "aws_internet_gateway.gitway",
+            "aws_vpc.first-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "a1",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": null,
+            "id": "rtbassoc-0ec7deea0675afea0",
+            "route_table_id": "rtb-03814b0516d60de2b",
+            "subnet_id": "subnet-0f8d4f61f4913b06c"
+          },
+          "private": "bnVsbA==",
+          "depends_on": [
+            "aws_route_table.publicRoute",
+            "aws_subnet.subnet1"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "b1",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": null,
+            "id": "rtbassoc-02da827cfed61941f",
+            "route_table_id": "rtb-03814b0516d60de2b",
+            "subnet_id": "subnet-09bd04e931bcabb2b"
+          },
+          "private": "bnVsbA==",
+          "depends_on": [
+            "aws_route_table.publicRoute",
+            "aws_subnet.subnet3"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "c",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": null,
+            "id": "rtbassoc-0629d780a72ef400e",
+            "route_table_id": "rtb-08f740373bc6a7aff",
+            "subnet_id": "subnet-00db1db6c287b48b4"
+          },
+          "private": "bnVsbA==",
+          "depends_on": [
+            "aws_route_table.privateRoute",
+            "aws_subnet.subnet2"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_route_table_association",
+      "name": "d",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 0,
+          "attributes": {
+            "gateway_id": null,
+            "id": "rtbassoc-027ca8d65f35685eb",
+            "route_table_id": "rtb-08f740373bc6a7aff",
+            "subnet_id": "subnet-0736ad3b667111dbd"
+          },
+          "private": "bnVsbA==",
+          "depends_on": [
+            "aws_route_table.privateRoute",
+            "aws_subnet.subnet4"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "subnet1",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:386702012512:subnet/subnet-0f8d4f61f4913b06c",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.0.1.0/24",
+            "id": "subnet-0f8d4f61f4913b06c",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "map_public_ip_on_launch": false,
+            "owner_id": "386702012512",
+            "tags": {
+              "Name": "subnet1"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-005aaf1f9a3275c32"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "depends_on": [
+            "aws_vpc.first-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "subnet2",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:386702012512:subnet/subnet-00db1db6c287b48b4",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1a",
+            "availability_zone_id": "use1-az2",
+            "cidr_block": "10.0.2.0/24",
+            "id": "subnet-00db1db6c287b48b4",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "map_public_ip_on_launch": false,
+            "owner_id": "386702012512",
+            "tags": {
+              "Name": "subnet2"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-005aaf1f9a3275c32"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "depends_on": [
+            "aws_vpc.first-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "subnet3",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:386702012512:subnet/subnet-09bd04e931bcabb2b",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az4",
+            "cidr_block": "10.0.3.0/24",
+            "id": "subnet-09bd04e931bcabb2b",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "map_public_ip_on_launch": false,
+            "owner_id": "386702012512",
+            "tags": {
+              "Name": "subnet3"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-005aaf1f9a3275c32"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "depends_on": [
+            "aws_vpc.first-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_subnet",
+      "name": "subnet4",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:386702012512:subnet/subnet-0736ad3b667111dbd",
+            "assign_ipv6_address_on_creation": false,
+            "availability_zone": "us-east-1b",
+            "availability_zone_id": "use1-az4",
+            "cidr_block": "10.0.4.0/24",
+            "id": "subnet-0736ad3b667111dbd",
+            "ipv6_cidr_block": "",
+            "ipv6_cidr_block_association_id": "",
+            "map_public_ip_on_launch": false,
+            "owner_id": "386702012512",
+            "tags": {
+              "Name": "subnet4"
+            },
+            "timeouts": null,
+            "vpc_id": "vpc-005aaf1f9a3275c32"
+          },
+          "private": "eyJlMmJmYjczMC1lY2FhLTExZTYtOGY4OC0zNDM2M2JjN2M0YzAiOnsiY3JlYXRlIjo2MDAwMDAwMDAwMDAsImRlbGV0ZSI6MTIwMDAwMDAwMDAwMH0sInNjaGVtYV92ZXJzaW9uIjoiMSJ9",
+          "depends_on": [
+            "aws_vpc.first-vpc"
+          ]
+        }
+      ]
+    },
+    {
+      "mode": "managed",
+      "type": "aws_vpc",
+      "name": "first-vpc",
+      "provider": "provider.aws",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "arn": "arn:aws:ec2:us-east-1:386702012512:vpc/vpc-005aaf1f9a3275c32",
+            "assign_generated_ipv6_cidr_block": false,
+            "cidr_block": "10.0.0.0/16",
+            "default_network_acl_id": "acl-00d802969068b8df5",
+            "default_route_table_id": "rtb-04666fb379e2cc964",
+            "default_security_group_id": "sg-00d21c67e53792c00",
+            "dhcp_options_id": "dopt-fae6d281",
+            "enable_classiclink": false,
+            "enable_classiclink_dns_support": false,
+            "enable_dns_hostnames": false,
+            "enable_dns_support": true,
+            "id": "vpc-005aaf1f9a3275c32",
+            "instance_tenancy": "default",
+            "ipv6_association_id": "",
+            "ipv6_cidr_block": "",
+            "main_route_table_id": "rtb-04666fb379e2cc964",
+            "owner_id": "386702012512",
+            "tags": {}
+          },
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    }
+  ]
+}
